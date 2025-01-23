@@ -24,6 +24,7 @@ $ streamlit run app.py
 ```
 
 ### DBの設定(SQLAlchemy + Alembic)
+
 ```bash
 # ORMなどのインストール
 pip install sqlalchemy         # ORMの本体
@@ -31,13 +32,20 @@ pip install psycopg2-binary    # PostgreSQLドライバ
 pip install python-dotenv      # 環境変数管理
 pip install alembic            # マイグレーション管理
 
-# alembicの操作
+# alembicの初期化
 $ alembic init migrations      # 初期化
-$ alembic revision             # migrationsファイルの作成
-$ alembic upgrade head         # migrationsの実行
 
-# (任意の名前のmigrationsファイルを作成するとき)
-$ alembic revision --autogenerate -m "first-migrate" 
+# 作成された各ファイルの編集
+## alembic.ini ファイル
+sqlalchemy.url = "DBのURLを設定"
+
+## migrations/env.py ファイル
+from database.models import Base  # modelsファイルをimport
+target_metadata = Base.metadata   # target_metadataにこれを設定
+
+# migrationの実行
+$ alembic revision --autogenerate -m "first-migrate"  # migrationsファイルの作成
+$ alembic upgrade head         # migrationsの実行
 ```
 
 ## Streamlitのデプロイ手順
