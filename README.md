@@ -36,15 +36,22 @@ pip install alembic            # マイグレーション管理
 $ alembic init migrations      # 初期化
 
 # migrations/env.pyファイルの編集
-   import os                         # osをimport
-   from database.models import Base  # modelsを参照
+import os                         # osをimport
+from database.models import Base  # modelsを参照
 
-   config.set_main_option('sqlalchemy.url', os.getenv("DATABASE_URL"))  # configの下にこれを追加
-   target_metadata = Base.metadata   # target_metadataにこれを設定
+config.set_main_option('sqlalchemy.url', os.getenv("DATABASE_URL"))  # configの下にこれを追加
+target_metadata = Base.metadata   # target_metadataにこれを設定
 
 # migrationの実行
 $ alembic revision --autogenerate -m "first-migrate"  # migrationsファイルの作成
 $ alembic upgrade head         # migrationsの実行
+```
+
+### エラー対応
+
+```bash
+# DBにアクセルして「DROP TABLE alembic_version;」を削除する
+> ERROR [alembic.util.messaging] Can't locate revision identified by 'f457c1606a58'
 ```
 
 ### pgAdminの設定
