@@ -49,11 +49,9 @@ $ streamlit run app.py
 $ pip freeze > requirements.txt
 ```
 2. `.gitignore`ファイルの準備
-```
-
-```
-
-3. GUIにてデプロイ
+   - vscodeからは上げるファイルのチャックボックスを外せば自動でgitignoreファイルが生成される
+   - .venvなどの仮想環境に関係するファイルは上げる必要はない
+3. GUIにてデプロイ(publicにしないとできない)
 
 ## その他ライブラリなどの環境構築
 ### Prisma
@@ -94,3 +92,16 @@ createdAt DateTime @default(now())
 - [公式ドキュメントの環境構築](https://docs.streamlit.io/get-started/installation/command-line)
 - [公式チュートリアル](https://docs.streamlit.io/develop/tutorials)
 - [サンプルアプリの例](https://gihyo.jp/article/2024/10/monthly-python-2410)
+
+## メモ
+- SQLAlchemy + Alembic（マイグレーション）
+
+
+pip install alembic
+alembic init migrations
+
+
+
+pip install sqlalchemy
+
+pip install streamlit sqlalchemy psycopg2-binary python-dotenv
