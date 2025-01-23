@@ -69,7 +69,8 @@ $ pip freeze > requirements.txt
 1. `.gitignore` の準備
    - vscodeからは上げるファイルのチャックボックスを外せば自動でgitignoreファイルが生成される
    - .venvなどの仮想環境に関係するファイルは上げる必要はない
-2. GUIにてデプロイ(publicにしないとできない)
+2. GUIにてデプロイしたいGithubのディレクトリを選択する
+3. 環境変数を設定するために、Sttings/Secretsに `DATABASE_URL` などを入力する(RenderのPostgreSQLの場合はhostnameの後ろに.oregon-postgresが必要)
 
 ## 参考リンク
 - [公式ドキュメントの環境構築](https://docs.streamlit.io/get-started/installation/command-line)
