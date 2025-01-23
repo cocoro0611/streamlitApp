@@ -35,18 +35,24 @@ pip install alembic            # マイグレーション管理
 # alembicの初期化
 $ alembic init migrations      # 初期化
 
-# 作成された各ファイルの編集
-## alembic.ini ファイル
-sqlalchemy.url = "DBのURLを設定"
+# migrations/env.pyファイルの編集
+   import os                         # osをimport
+   from database.models import Base  # modelsを参照
 
-## migrations/env.py ファイル
-from database.models import Base  # modelsファイルをimport
-target_metadata = Base.metadata   # target_metadataにこれを設定
+   config.set_main_option('sqlalchemy.url', os.getenv("DATABASE_URL"))  # configの下にこれを追加
+   target_metadata = Base.metadata   # target_metadataにこれを設定
 
 # migrationの実行
 $ alembic revision --autogenerate -m "first-migrate"  # migrationsファイルの作成
 $ alembic upgrade head         # migrationsの実行
 ```
+
+### pgAdminの設定
+- ホスト名／アドレス：`postgres`
+- ポート番号　　　　：`5432`
+- 管理用データベース：`test_python`
+- ユーザ名　　　　　：`cocoro`
+- パズワード　　　　：`Pa55word`
 
 ## Streamlitのデプロイ手順
 1. `requirements.txt` の作成 (指定のバージョンがインストールされるようにする)
