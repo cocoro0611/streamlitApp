@@ -1,6 +1,1 @@
-# database/__init__.py
-from .database import SessionLocal, engine, Base
-from .models import User
-
-# テーブル作成
-Base.metadata.create_all(bind=engine)
+# Pythonパッケージを認識させるために必要な空ファイルで作成が必要
