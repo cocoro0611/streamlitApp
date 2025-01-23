@@ -3,7 +3,7 @@ services:
     image: postgres:14
     container_name: pythonApp
     ports:
-      - 5433:5433
+      - 5432:5432
     volumes:
       - db_data:/var/lib/postgresql/data
     environment:
@@ -14,6 +14,17 @@ services:
     hostname: postgres
     restart: always
     user: root
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: cocoro@ecample.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgresql
 
 volumes:
   db_data: {}

@@ -1,107 +1,56 @@
 ## Streamlitを用いた環境構築
-1. 仮想環境の構築とアクティブ化と停止
+### 仮想環境の構築とアクティブ化と停止
 ```bash
 # 仮想環境をインストール
-$ python3 -m venv [.任意の名前]
+$ python3 -m venv .venv   #.venvは任意の名前で良いが隠しフォルダの方がいい
 
 # ターミナルが(.venv)となり仮想環境が立ち上がる
-$ source [.任意の名前]/bin/activate 
+$ source .venv/bin/activate 
 
 # 仮想環境を停止させる
 $ deactivate 
 ```
 
-2. Streamlitを環境にインストールとサンプリアプリの立ち上げ
+### Streamlitの導入と操作
 ```bash
 # Streamlitのインストール
 $ pip install streamlit
 
 # サンプルアプリの起動
 $ streamlit hello
-```
 
-
-## Streamlitを用いた簡単なアプリケーションの作成
-1. 新しい環境を使うときは、その都度、仮想環境を停止させる必要がある
-```bash
-$ deactivate 
-```
-
-2. `[.任意の名前]` と同じ階層に `app.py` ファイルを作成する
-```python
-import streamlit as st
-st.write("Hello world")
-```
-
-3. 改めて仮想環境を立ち上げる
-```bash
-$ source [.任意の名前]/bin/activate
-```
-
-4. Streamlit アプリを実行する
-```bash
+# 作成したアプリの起動（app.py）
 $ streamlit run app.py
 ```
 
+### DBの設定(SQLAlchemy + Alembic)
+```bash
+# ORMなどのインストール
+pip install sqlalchemy         # ORMの本体
+pip install psycopg2-binary    # PostgreSQLドライバ
+pip install python-dotenv      # 環境変数管理
+pip install alembic            # マイグレーション管理
+
+# alembicの操作
+$ alembic init migrations      # 初期化
+$ alembic revision             # migrationsファイルの作成
+$ alembic upgrade head         # migrationsの実行
+
+# (任意の名前のmigrationsファイルを作成するとき)
+$ alembic revision --autogenerate -m "first-migrate" 
+```
+
 ## Streamlitのデプロイ手順
-1. `requirements.txt`ファイルを作成して、指定のバージョンがインストールされるようにする
+1. `requirements.txt` の作成 (指定のバージョンがインストールされるようにする)
 ```bash
 $ pip freeze > requirements.txt
 ```
-2. `.gitignore`ファイルの準備
+1. `.gitignore` の準備
    - vscodeからは上げるファイルのチャックボックスを外せば自動でgitignoreファイルが生成される
    - .venvなどの仮想環境に関係するファイルは上げる必要はない
-3. GUIにてデプロイ(publicにしないとできない)
-
-## その他ライブラリなどの環境構築
-### Prisma
-1. Prismaのインストール
-```bash
-# Prismaのインストール
-$ pip install prisma
-
-# Prismaの初期化
-$ prisma init
-
-# Prismaの操作
-$ prisma generate
-$ prisma migrate dev --name init
-```
-2. `schema.prisma`ファイルの作成例
-```
-datasource db {
-provider = "postgresql"
-url      = env("DATABASE_URL")
-}
-
-generator client {
-provider = "prisma-client-py"
-recursive_type_depth = -1  // Pythonの型サポートを改善
-}
-
-model User {
-id        Int      @id @default(autoincrement())
-email     String   @unique
-name      String?
-createdAt DateTime @default(now())
-}
-```
-
+2. GUIにてデプロイ(publicにしないとできない)
 
 ## 参考リンク
 - [公式ドキュメントの環境構築](https://docs.streamlit.io/get-started/installation/command-line)
 - [公式チュートリアル](https://docs.streamlit.io/develop/tutorials)
 - [サンプルアプリの例](https://gihyo.jp/article/2024/10/monthly-python-2410)
-
-## メモ
-- SQLAlchemy + Alembic（マイグレーション）
-
-
-pip install alembic
-alembic init migrations
-
-
-
-pip install sqlalchemy
-
-pip install streamlit sqlalchemy psycopg2-binary python-dotenv
