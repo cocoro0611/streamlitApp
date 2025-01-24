@@ -23,7 +23,7 @@ with col1:
     st.code(code, language="python")
 
     # 画像
-    image1 = Image.open("./fig/siba1.jpg")
+    image1 = Image.open("static/images/siba1.jpg")
 
     response = requests.get("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjKld93ujSJ-vKCx8FIpy1nGimFgtoWpToBiPLl5aZVW9_W-Eig0bmpD8mpbTKIrw4NfKnhzHqIQE4KA6kReMfm-NjlMG8GPnzrVbBaMGdyEcb-U_vev81rtg0CWCDjU2orYSwrGpHsFoZ/s800/dog_shibainu_black.png")
     image_data = BytesIO(response.content)
@@ -84,7 +84,7 @@ with col1:
 
 with col2:
     # データ分析関連
-    df = pd.read_csv("./data/temperature.csv",index_col="月")
+    df = pd.read_csv("static/data/temperature.csv",index_col="月")
     # st.dataframe(df)
     st.table(df)
     st.line_chart(df)
