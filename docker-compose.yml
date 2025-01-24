@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: cocoro
       POSTGRES_PASSWORD: Pa55word
-      POSTGRES_DB: test_python
+      POSTGRES_DB: pydb
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     hostname: postgres
     restart: always

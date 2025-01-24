@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from ..database.models.user import User
+from src.database.models import User
 
 class UserCRUD:
     # データベースセッションを保持

@@ -1,3 +1,3 @@
-from .crud import UserCRUD
+from .userCrad import UserCRUD
 
 __all__ = ['UserCRUD']

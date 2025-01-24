@@ -36,8 +36,8 @@ pip install alembic            # マイグレーション管理
 $ alembic init migrations      # 初期化
 
 # migrations/env.pyファイルの編集
-import os                         # osのimportを追加
-from src.database.models import Base   # modelsを参照を追加   
+import os                             # osのimportを追加
+from src.database.models import Base  # modelsを参照を追加   
 
 config.set_main_option('sqlalchemy.url', os.getenv("DATABASE_URL"))  # configの下にこれを追加
 target_metadata = Base.metadata   # target_metadataにこれを設定
