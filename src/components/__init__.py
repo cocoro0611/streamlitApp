@@ -1,3 +1,4 @@
-from .form import UserManagementUI
+from .Profile import ProfileUI
+from .Result import ExerciseResultUI
 
-__all__ = ['UserManagementUI']
+__all__ = ['ProfileUI', 'ExerciseResultUI']
